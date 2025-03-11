@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSYE7374: Deep Learning and Generative Models in Healthcare</title>
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #3498db;
+            --accent-color: #4c221d;
+            --light-bg: #f8f9fa;
+            --border-color: #e9ecef;
+            --text-color: #343a40;
+            --text-muted: #6c757d;
+        }
+        
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: #fff;
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        header {
+            padding: 40px 0 30px;
+            border-bottom: 1px solid var(--border-color);
+            margin-bottom: 40px;
+            text-align: center;
+            background-color: var(--light-bg);
+            border-radius: 0 0 10px 10px;
+        }
+        
+        h1 {
+            font-weight: 600;
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            color: var(--primary-color);
+            line-height: 1.2;
+        }
+        
+        h2 {
+            font-weight: 500;
+            font-size: 1.8rem;
+            margin-top: 50px;
+            margin-bottom: 20px;
+            color: var(--primary-color);
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--secondary-color);
+        }
+        
+        h3 {
+            font-weight: 500;
+            font-size: 1.4rem;
+            margin-top: 30px;
+            margin-bottom: 15px;
+            color: var(--primary-color);
+        }
+        
+        p {
+            margin-bottom: 15px;
+        }
+        
+        a {
+            color: var(--secondary-color);
+            text-decoration: none;
+            transition: all 0.2s ease;
+        }
+        
+        a:hover {
+            color: var(--accent-color);
+            text-decoration: underline;
+        }
+        
+        /* Course info section */
+        .course-info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin: 30px 0;
+        }
+        
+        .info-card {
+            background-color: var(--light-bg);
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+        
+        /* Schedule table */
+        .schedule-container {
+            overflow-x: auto;
+            margin: 30px 0;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: white;
+        }
+        
+        thead {
+            background-color: var(--primary-color);
+            color: white;
+        }
+        
+        th, td {
+            padding: 15px;
+            text-align: left;
+            border: 1px solid var(--border-color);
+        }
+        
+        tr:nth-child(even) {
+            background-color: var(--light-bg);
+        }
+        
+        tr:hover {
+            background-color: rgba(52, 152, 219, 0.1);
+        }
+        
+        /* Resources */
+        .resource-link {
+            display: inline-block;
+            margin: 5px 5px 5px 0;
+            padding: 8px 15px;
+            background-color: var(--light-bg);
+            border-radius: 4px;
+            transition: all 0.2s;
+            border: 1px solid var(--border-color);
+        }
+        
+        .resource-link:hover {
+            background-color: var(--secondary-color);
+            color: white;
+            text-decoration: none;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        .resource-link i {
+            margin-right: 8px;
+        }
+        
+        /* Footer */
+        footer {
+            margin-top: 80px;
+            padding: 30px 0;
+            border-top: 1px solid var(--border-color);
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            text-align: center;
+        }
+        
+        /* Navigation */
+        nav {
+            display: flex;
+            justify-content: center;
+            margin: 20px 0 30px;
+        }
+        
+        nav a {
+            margin: 0 15px;
+            padding: 8px 15px;
+            font-weight: 500;
+        }
+        
+        /* Syllabus highlight */
+        .syllabus-highlight {
+            background-color: rgba(231, 234, 223, 0.1);
+            border-left: 4px solid var(--accent-color);
+            padding: 15px 20px;
+            margin: 20px 0;
+            border-radius: 0 8px 8px 0;
+        }
+        
+        /* Media queries */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+            
+            h2 {
+                font-size: 1.5rem;
+            }
+            
+            .course-info-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            th, td {
+                padding: 10px;
+            }
+        }
+    </style>
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+</head>
+
+<body>
+    <header>
+        <h1>CSYE7374: Applied Deep Learning and Generative Models in Healthcare</h1>
+        <p>Northeastern University - Spring 2025</p>
+    </header>
+
+    <section id="course-info">
+        <h2><i class="fas fa-graduation-cap"></i> Course Information</h2>
+        
+        <div class="course-info-grid">
+            <div class="info-card">
+                <h3><i class="fas fa-user-tie"></i> Instructor</h3>
+                <p>Mahmoud Ebrahimkhani<br>
+                <i class="fas fa-envelope"></i> m.ebrahimkhani@northeastern.edu<br>
+                <i class="fas fa-video"></i> Office: Online (Virtual)<br>
+                <i class="fas fa-clock"></i> Office Hours: Saturdays from 11:00 AM to 12:00 PM ET</p>
+            </div>
+            
+            <div class="info-card">
+                <h3><i class="fas fa-calendar-week"></i> Course Details</h3>
+                <p><i class="fas fa-clock"></i> Meeting Times: Saturdays from 12:00 PM to 4:00 PM ET<br>
+                <i class="fas fa-map-marker-alt"></i> Location: Online (Virtual)</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="syllabus">
+        <h2><i class="fas fa-book"></i> Course Description</h2>
+        
+        <div class="syllabus-highlight">
+            <p>
+                This course provides students with hands-on experience in applying deep neural networks, including
+                Convolutional Neural Networks (CNNs) and Graph Neural Networks (GNNs), to real-world medical data.
+                The curriculum encompasses essential concepts of Large Language Models (LLMs), transformers, and
+                attention mechanisms, highlighting their applications in medical imaging and drug discovery, such as
+                image segmentation and molecular property prediction.
+                Students will explore generative AI models, including Denoising Diffusion Probabilistic Models,
+                Generative Adversarial Networks (GANs), and Recurrent Neural Networks (RNNs), to generate new data
+                relevant to healthcare applications. The course emphasizes practical experience with state-of-the-art
+                models to address complex problems in medical settings. Throughout the course, students will work
+                with datasets that are noisy, sparse, and high-dimensional, developing expertise in techniques such as
+                feature engineering, segmentation, and registration to achieve successful outcomes.
+            </p>
+            <a href="syllabus/CSYE7374 41498 Deep Learn_Gen Mod Healthcare SEC 05 Spring 2025.pdf" target="_blank" class="resource-link">
+                <i class="fas fa-file-pdf"></i> See Complete Syllabus
+            </a>
+        </div>
+    </section>
+
+    <section id="schedule">
+        <h2><i class="fas fa-calendar-alt"></i> Course Schedule & Materials</h2>
+        
+        <div class="schedule-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Week</th>
+                        <th>Date</th>
+                        <th>In-Class Topic</th>
+                        <th>Assignment Due</th>
+                        <th>Materials</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>01/11</td>
+                        <td>Introduction to Deep Learning in Healthcare</td>
+                        <td></td>
+                        <td>
+                            <a href="slides/week1/250111_session_1.pdf" target="_blank" class="resource-link"><i class="fas fa-file-pdf"></i> Slides1</a>
+                            <a href="slides/week1/25_jan_11_session_1.pdf" target="_blank" class="resource-link"><i class="fas fa-file-pdf"></i> Slides2</a>
+                            <a href="notebooks/week1.pdf" target="_blank" class="resource-link"><i class="fas fa-file-pdf"></i> Notebook</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>01/18</td>
+                        <td>Convolutional Neural Networks (CNNs) in Medical Imaging</td>
+                        <td></td>
+                        <td>
+                            <a href="slides/week2/25_jan_18_session_2.pdf" target="_blank" class="resource-link"><i class="fas fa-file-pdf"></i> Slides</a>
+                            <a href="notebooks/medical_image_segmentation.ipynb" target="_blank" class="resource-link"><i class="fas fa-file-pdf"></i> Notebook</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>01/25</td>
+                        <td>Graph Neural Networks (GNNs) for Drug Discovery</td>
+                        <td>Assignment 1 Assigned</td>
+                        <td>
+                            <a href="slides/week3.pdf" target="_blank" class="resource-link"><i class="fas fa-file-pdf"></i> Slides</a>
+                            <a href="notebooks/week3.pdf" target="_blank" class="resource-link"><i class="fas fa-file-pdf"></i> Notebook</a>
+                            <a href="assignments/hw1.pdf" target="_blank" class="resource-link"><i class="fas fa-file-pdf"></i> Assignment 1</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>4</td>
+                        <td>02/01</td>
+                        <td>Large Language Models (LLMs) and Transformers in Medicine</td>
+                        <td></td>
+                        <td>
+                            <a href="slides/week4.pdf" target="_blank" class="resource-link"><i class="fas fa-file-pdf"></i> Slides</a>
+                            <a href="notebooks/week4.pdf" target="_blank" class="resource-link"><i class="fas fa-file-pdf"></i> Notebook</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>5</td>
+                        <td>02/08</td>
+                        <td>Attention Mechanisms and Applications in Healthcare</td>
+                        <td></td>
+                        <td>
+                            <a href="slides/week5.pdf" target="_blank" class="resource-link"><i class="fas fa-file-pdf"></i> Slides</a>
+                            <a href="notebooks/week5.pdf" target="_blank" class="resource-link"><i class="fas fa-file-pdf"></i> Notebook</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>6</td>
+                        <td>02/15</td>
+                        <td>Medical Image Segmentation</td>
+                        <td>Assignment 2 Assigned</td>
+                        <td>
+                            <a href="slides/week6.pdf" target="_blank" class="resource-link"><i class="fas fa-file-pdf"></i> Slides</a>
+                            <a href="notebooks/week6.pdf" target="_blank" class="resource-link"><i class="fas fa-file-pdf"></i> Notebook</a>
+                            <a href="assignments/hw2.pdf" target="_blank" class="resource-link"><i class="fas fa-file-pdf"></i> Assignment 2</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>7</td>
+                        <td>02/22</td>
+                        <td>Medical Image Classification</td>
+                        <td></td>
+                        <td>
+                            <a href="slides/week7.pdf" target="_blank" class="resource-link"><i class="fas fa-file-pdf"></i> Slides</a>
+                            <a href="notebooks/week7.pdf" target="_blank" class="resource-link"><i class="fas fa-file-pdf"></i> Notebook</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>8</td>
+                        <td>03/01</td>
+                        <td>Generative Adversarial Networks (GANs)</td>
+                        <td></td>
+                        <td>
+                            <a href="slides/week8.pdf" target="_blank" class="resource-link"><i class="fas fa-file-pdf"></i> Slides</a>
+                            <a href="notebooks/week8.pdf" target="_blank" class="resource-link"><i class="fas fa-file-pdf"></i> Notebook</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>9</td>
+                        <td>03/08</td>
+                        <td>BREAK – NO CLASSES</td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>10</td>
+                        <td>03/15</td>
+                        <td>Diffusion Models for Medical Image Generation</td>
+                        <td>Assignment 3 Assigned</td>
+                        <td>
+                            <a href="slides/week10.pdf" target="_blank" class="resource-link"><i class="fas fa-file-pdf"></i> Slides</a>
+                            <a href="notebooks/week10.pdf" target="_blank" class="resource-link"><i class="fas fa-file-pdf"></i> Notebook</a>
+                            <a href="assignments/assignment3.pdf" target="_blank" class="resource-link"><i class="fas fa-file-pdf"></i> Assignment 3</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>11</td>
+                        <td>03/22</td>
+                        <td>Automated Diagnosis with Deep Learning</td>
+                        <td></td>
+                        <td>
+                            <a href="slides/week11.pdf" target="_blank" class="resource-link"><i class="fas fa-file-pdf"></i> Slides</a>
+                            <a href="notebooks/week11.pdf" target="_blank" class="resource-link"><i class="fas fa-file-pdf"></i> Notebook</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>12</td>
+                        <td>03/29</td>
+                        <td>Protein Language Models (PLMs) and Protein Structure Prediction (AlphaFold)</td>
+                        <td>Final Project Proposal Due</td>
+                        <td>
+                            <a href="slides/week12.pdf" target="_blank" class="resource-link"><i class="fas fa-file-pdf"></i> Slides</a>
+                            <a href="notebooks/week12.pdf" target="_blank" class="resource-link"><i class="fas fa-file-pdf"></i> Notebook</a>
+                            <a href="assignments/final_project.pdf" target="_blank" class="resource-link"><i class="fas fa-file-pdf"></i> Final Project Guidelines</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>13</td>
+                        <td>04/05</td>
+                        <td>Molecular Property Prediction and Drug Discovery</td>
+                        <td>Assignment 4 Assigned</td>
+                        <td>
+                            <a href="slides/week13.pdf" target="_blank" class="resource-link"><i class="fas fa-file-pdf"></i> Slides</a>
+                            <a href="notebooks/week13.pdf" target="_blank" class="resource-link"><i class="fas fa-file-pdf"></i> Notebook</a>
+                            <a href="assignments/assignment4.pdf" target="_blank" class="resource-link"><i class="fas fa-file-pdf"></i> Assignment 4</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>14</td>
+                        <td>04/12</td>
+                        <td>Applications of Generative AI in Drug Discovery</td>
+                        <td></td>
+                        <td>
+                            <a href="slides/week14.pdf" target="_blank" class="resource-link"><i class="fas fa-file-pdf"></i> Slides</a>
+                            <a href="notebooks/week14.pdf" target="_blank" class="resource-link"><i class="fas fa-file-pdf"></i> Notebook</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>15</td>
+                        <td>04/19</td>
+                        <td>Final Project Presentations</td>
+                        <td></td>
+                        <td>
+                            <a href="slides/week15.pdf" target="_blank" class="resource-link"><i class="fas fa-file-pdf"></i> Presentation Guidelines</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <footer>
+        <p><i class="far fa-copyright"></i> Mahmoud Ebrahimkhani, Northeastern University - Updated: March 2025</p>
+        <p><i class="fab fa-github"></i> This site is hosted on <a href="https://github.com/yourusername/course-repo">GitHub</a>.</p>
+    </footer>
+</body>
+</html>
