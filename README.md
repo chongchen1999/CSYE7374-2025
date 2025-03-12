@@ -64,14 +64,65 @@ Create the following folders in your repository to match the links in the HTML:
 
 Upload the respective files to each folder.
 
-## Maintenance
+## Modifying the Website
 
-To update the website:
+### Editing index.html Locally
 
-1. Make changes to your local files
-2. Commit and push changes to GitHub:
+1. Open `index.html`.
+
+2. Make the desired changes to the file. Common modifications include:
+
+   #### Adding a New Week to the Schedule
+   ```html
+   <tr>
+       <td>16</td>
+       <td>04/26</td>
+       <td>New Topic Title</td>
+       <td>Any assignments due</td>
+       <td>
+           <a href="slides/new-slides.pdf" target="_blank" class="resource-link"><i class="fas fa-file-pdf"></i> Slides</a>
+           <a href="notebooks/new-notebook.ipynb" target="_blank" class="resource-link"><i class="fas fa-file-pdf"></i> Notebook</a>
+       </td>
+   </tr>
+   ```
+
+   #### Adding a New Section
+   ```html
+   <section id="new-section">
+       <h2><i class="fas fa-icon-name"></i> New Section Title</h2>
+       
+       <p>Content for your new section goes here.</p>
+       
+       <!-- More HTML content as needed -->
+   </section>
+   ```
+
+   #### Modifying Course Information
+   To update instructor information or course details, locate the `course-info-grid` section:
+   ```html
+   <div class="info-card">
+       <h3><i class="fas fa-user-tie"></i> Instructor</h3>
+       <p>Updated Instructor Name<br>
+       <i class="fas fa-envelope"></i> updated.email@northeastern.edu<br>
+       <i class="fas fa-video"></i> Office: New Location<br>
+       <i class="fas fa-clock"></i> Office Hours: New Hours</p>
+   </div>
+   ```
+
+   #### Adding or Updating Resources
+   ```html
+   <a href="path/to/new-resource.pdf" target="_blank" class="resource-link">
+       <i class="fas fa-file-pdf"></i> Resource Name
+   </a>
+   ```
+
+3. Save your changes in the editor
+
+4. Commit and push your changes to GitHub:
    ```bash
-   git add .
-   git commit -m "Update website with [description of changes]"
+   git add index.html
+   git commit -m "Updated index.html with [description of changes]"
    git push origin main
    ```
+
+Your changes will be published automatically to your GitHub Pages site, typically within a few minutes.
